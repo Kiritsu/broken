@@ -1,0 +1,145 @@
+﻿using System;
+using System.Runtime.InteropServices;
+using Broken.Exceptions;
+
+namespace Broken
+{
+    public static partial class MemoryHelpers
+    {
+        /// <summary>
+        ///     Writes a <see cref="Char"/> to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static void WriteChar(IntPtr hProcess, IntPtr lpBaseAddress, char value)
+        {
+            Write(hProcess, lpBaseAddress, value);
+        }
+
+        /// <summary>
+        ///     Writes a <see cref="Byte"/> to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static void WriteByte(IntPtr hProcess, IntPtr lpBaseAddress, byte value)
+        {
+            Write(hProcess, lpBaseAddress, value);
+        }
+
+        /// <summary>
+        ///     Writes a <see cref="Int16"/> to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static void WriteInt16(IntPtr hProcess, IntPtr lpBaseAddress, short value)
+        {
+            Write(hProcess, lpBaseAddress, value);
+        }
+
+        /// <summary>
+        ///     Writes a <see cref="UInt16"/> to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static void WriteUInt16(IntPtr hProcess, IntPtr lpBaseAddress, ushort value)
+        {
+            Write(hProcess, lpBaseAddress, value);
+        }
+
+        /// <summary>
+        ///     Writes a <see cref="Int32"/> to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static void WriteInt32(IntPtr hProcess, IntPtr lpBaseAddress, int value)
+        {
+            Write(hProcess, lpBaseAddress, value);
+        }
+
+        /// <summary>
+        ///     Writes a <see cref="UInt32"/> to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static void WriteUInt32(IntPtr hProcess, IntPtr lpBaseAddress, uint value)
+        {
+            Write(hProcess, lpBaseAddress, value);
+        }
+
+        /// <summary>
+        ///     Writes a <see cref="Int64"/> to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static void WriteInt64(IntPtr hProcess, IntPtr lpBaseAddress, long value)
+        {
+            Write(hProcess, lpBaseAddress, value);
+        }
+
+        /// <summary>
+        ///     Writes a <see cref="UInt64"/> to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static void WriteUInt64(IntPtr hProcess, IntPtr lpBaseAddress, ulong value)
+        {
+            Write(hProcess, lpBaseAddress, value);
+        }
+
+        /// <summary>
+        ///     Writes a <see cref="IntPtr"/> to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static void WritePointer(IntPtr hProcess, IntPtr lpBaseAddress, IntPtr value)
+        {
+            Write(hProcess, lpBaseAddress, value);
+        }
+
+        /// <summary>
+        ///     Writes a <see cref="T"/> value to memory at the specified address.
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <typeparam name="T">Type or struct representing the element to read from the memory.</typeparam>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static unsafe void Write<T>(IntPtr hProcess, IntPtr lpBaseAddress, T value) where T : unmanaged
+        {
+            var size = sizeof(T);
+            var sizePtr = new IntPtr(size);
+
+            if (!WriteProcessMemory(hProcess, lpBaseAddress, &value, sizePtr, out var bytesWritten)
+                || bytesWritten != sizePtr)
+            {
+                throw new MemoryWriteException(hProcess, lpBaseAddress)
+                {
+                    Size = sizePtr,
+                    Value = value
+                };
+            }
+        }
+
+        [DllImport("kernel32.dll")]
+        private static extern unsafe bool WriteProcessMemory(
+            IntPtr hProcess, IntPtr lpBaseAddress, void* lpBuffer, IntPtr nSize, out IntPtr lpNumberOfBytesWritten);
+    }
+}
