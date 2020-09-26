@@ -12,7 +12,7 @@ namespace Broken.Exceptions
         /// <summary>
         ///     Gets the size of the value.
         /// </summary>
-        public IntPtr Size { get; init; }
+        public IntPtr? Size { get; init; }
         
         public MemoryWriteException(IntPtr processHandle, IntPtr baseAddress) 
             : this("An error occured when trying to write memory.", processHandle, baseAddress)
