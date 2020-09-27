@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using Broken.Enums;
 using Broken.Exceptions;
 
 namespace Broken
@@ -138,8 +139,27 @@ namespace Broken
             }
         }
 
+        /// <summary>
+        ///     Changes the protection of the given address in memory.
+        /// </summary>
+        /// <param name="hProcess">Process handle to change protection to.</param>
+        /// <param name="lpBaseAddress">Address to change protection to.</param>
+        /// <param name="dwSize">Size of the region to change protection to.</param>
+        /// <param name="protection">New protection to apply.</param>
+        /// <param name="oldProtection">Old protection to that given address in memory.</param>
+        public static void VirtualProtectEx(IntPtr hProcess, IntPtr lpBaseAddress, UIntPtr dwSize,
+            VirtualProtection protection, out VirtualProtection oldProtection)
+        {
+            VirtualProtectEx(hProcess, lpBaseAddress, dwSize, (uint)protection, out var oldProtectionUint);
+            oldProtection = (VirtualProtection) oldProtectionUint;
+        }
+
         [DllImport("kernel32.dll")]
         private static extern unsafe bool WriteProcessMemory(
             IntPtr hProcess, IntPtr lpBaseAddress, void* lpBuffer, IntPtr nSize, out IntPtr lpNumberOfBytesWritten);
+        
+        [DllImport("kernel32.dll")]
+        private static extern unsafe bool VirtualProtectEx(
+            IntPtr hProcess, IntPtr lpBaseAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);
     }
 }
