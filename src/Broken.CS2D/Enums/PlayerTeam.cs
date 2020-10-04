@@ -1,4 +1,4 @@
-﻿namespace Broken.Enums
+﻿namespace Broken.CS2D.Enums
 {
     public enum PlayerTeam
     {

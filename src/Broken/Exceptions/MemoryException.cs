@@ -2,7 +2,7 @@
 
 namespace Broken.Exceptions
 {
-    public class MemoryException : Exception
+    public abstract class MemoryException : Exception
     {
         /// <summary>
         ///     Gets the handle of the process that caused this <see cref="MemoryException"/>.
@@ -15,7 +15,8 @@ namespace Broken.Exceptions
         public IntPtr BaseAddress { get; }
         
         public MemoryException(IntPtr processHandle, IntPtr baseAddress) 
-            : this("Something wrong happened.", processHandle, baseAddress)
+            : this("A memory exception happened. See the child exception for more information.", 
+                processHandle, baseAddress)
         {
         }
         

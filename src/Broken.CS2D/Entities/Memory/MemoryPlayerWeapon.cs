@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using Broken.CS2D.Enums;
 using Broken.Enums;
 
 namespace Broken.Entities.Memory
