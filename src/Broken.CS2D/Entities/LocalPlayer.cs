@@ -32,16 +32,16 @@ namespace Broken.Entities
         /// <summary>
         ///     Gets the weapon of the player.
         /// </summary>
-        public PlayerWeapon? Weapon { get; init; }
+        public PlayerWeapon Weapon { get; init; }
         
         /// <summary>
         ///     Gets the money of the player.
         /// </summary>
-        public PlayerMoney? Money { get; init; }
+        public PlayerMoney Money { get; init; }
         
         /// <summary>
         ///     Gets the health of the player.
         /// </summary>
-        public PlayerHealth? Health { get; init; }
+        public PlayerHealth Health { get; init; }
     }
 }
