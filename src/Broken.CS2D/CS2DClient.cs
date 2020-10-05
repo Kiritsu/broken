@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using Broken.Entities;
-using Broken.Entities.Memory;
+using System.Runtime.InteropServices;
+using Broken.CS2D.Entities;
+using Broken.CS2D.Entities.Memory;
 using Broken.Enums;
 
 namespace Broken.CS2D
@@ -54,17 +55,17 @@ namespace Broken.CS2D
                 },
                 Health = new PlayerHealth
                 {
-                    Value = health.Health
+                    Value = health.RealHealth
                 },
                 Money = new PlayerMoney
                 {
-                    Value = money.Money
+                    Value = money.RealMoney
                 }
             };
         }
 
         /// <summary>
-        ///     Patches encryption algorithm. Used for health and money.
+        ///     Patches encryption algorithm. Used for health and money. Facultative.
         /// </summary>
         public void PatchEncryption()
         {
@@ -78,7 +79,7 @@ namespace Broken.CS2D
         }
 
         /// <summary>
-        ///     Fixes the "encrypted" pointers so it allows us to change the value of health and money.
+        ///     Fixes the "encrypted" pointers so it allows us to change the value of health and money. Facultative.but yeah
         /// </summary>
         /// <param name="health">Health to set.</param>
         /// <param name="money">Money to set.</param>

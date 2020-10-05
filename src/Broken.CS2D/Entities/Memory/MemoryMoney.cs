@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Broken.Entities.Memory
+namespace Broken.CS2D.Entities.Memory
 {
     [StructLayout(LayoutKind.Explicit)]
     public struct MemoryMoney
@@ -10,5 +10,7 @@ namespace Broken.Entities.Memory
 
         [FieldOffset(0xC)] 
         public int Protection;
+        
+        public int RealMoney => Money + Protection;
     }
 }

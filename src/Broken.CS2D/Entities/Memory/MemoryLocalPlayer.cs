@@ -1,8 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using Broken.CS2D.Enums;
-using Broken.Enums;
 
-namespace Broken.Entities.Memory
+namespace Broken.CS2D.Entities.Memory
 {
     [StructLayout(LayoutKind.Explicit)]
     public struct MemoryLocalPlayer

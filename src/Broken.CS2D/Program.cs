@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
@@ -10,8 +11,6 @@ namespace Broken.CS2D
         {
             var process = Process.GetProcessesByName("CS2D").First();
             var client = new CS2DClient(process);
-            client.PatchEncryption();
-            client.FixEncryptedPointers();
             client.ToggleFlashHack(true);
         }
     }

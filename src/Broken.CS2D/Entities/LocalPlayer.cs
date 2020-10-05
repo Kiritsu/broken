@@ -1,7 +1,6 @@
 ﻿using Broken.CS2D.Enums;
-using Broken.Enums;
 
-namespace Broken.Entities
+namespace Broken.CS2D.Entities
 {
     public class LocalPlayer
     {

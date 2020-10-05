@@ -1,4 +1,4 @@
-﻿namespace Broken.Entities
+﻿namespace Broken.CS2D.Entities
 {
     public class PlayerHealth
     {
