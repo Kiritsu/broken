@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 namespace Broken.CS2D
 {
@@ -11,7 +12,6 @@ namespace Broken.CS2D
             var client = new CS2DClient(process);
             client.PatchEncryption();
             client.FixEncryptedPointers();
-            var localPlayer = client.GetLocalPlayer();
         }
     }
 }

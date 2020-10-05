@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using Broken.Enums;
 using Broken.Exceptions;
 
@@ -137,6 +138,24 @@ namespace Broken
                     Value = value
                 };
             }
+        }
+
+        /// <summary>
+        ///     Safely writes a <see cref="T"/> value to memory at the specified address. 
+        /// </summary>
+        /// <param name="hProcess">Process handle to write to.</param>
+        /// <param name="lpBaseAddress">Address to write to.</param>
+        /// <param name="value">Value to write.</param>
+        /// <typeparam name="T">Type or struct representing the element to read from the memory.</typeparam>
+        /// <exception cref="MemoryWriteException">Thrown when writing memory failed.</exception>
+        public static unsafe void SafeWrite<T>(IntPtr hProcess, IntPtr lpBaseAddress, T value) where T : unmanaged
+        {
+            var size = sizeof(T);
+            var sizePtr = new UIntPtr((uint)size);
+
+            VirtualProtectEx(hProcess, lpBaseAddress, sizePtr, VirtualProtection.PageExecuteReadWrite, out var oldProtection);
+            Write(hProcess, lpBaseAddress, value);
+            VirtualProtectEx(hProcess, lpBaseAddress, sizePtr, oldProtection, out _);
         }
 
         /// <summary>

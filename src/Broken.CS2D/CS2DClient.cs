@@ -69,19 +69,12 @@ namespace Broken.CS2D
         public void PatchEncryption()
         {
             var address = new IntPtr(Offsets.GameBase + Offsets.EncryptionOffset);
-            var sizeofByte = new UIntPtr(sizeof(byte));
-            MemoryHelpers.VirtualProtectEx(Handle, address, sizeofByte, VirtualProtection.PageReadWrite, out var oldProtection);
-
             // push ebp -> ret 
-            MemoryHelpers.WriteByte(Handle, address, 0xC3);
-            MemoryHelpers.VirtualProtectEx(Handle, address, sizeofByte, oldProtection, out oldProtection);
-
+            MemoryHelpers.SafeWrite(Handle, address, (byte)0xC3);
+            
             address = new IntPtr(Offsets.GameBase + Offsets.AntiCrashOffset);
-            MemoryHelpers.VirtualProtectEx(Handle, address, sizeofByte, VirtualProtection.PageReadWrite, out oldProtection);
-
             // je 005C1D16 -> jmp 005C1D16
-            MemoryHelpers.WriteByte(Handle, address, 0xEB);
-            MemoryHelpers.VirtualProtectEx(Handle, address, sizeofByte, oldProtection, out oldProtection);
+            MemoryHelpers.SafeWrite(Handle, address, (byte)0xEB);
         }
 
         /// <summary>
@@ -94,10 +87,10 @@ namespace Broken.CS2D
             var localPlayerPointer = MemoryHelpers.ReadInt32(Handle, new IntPtr(Offsets.GameBase + Offsets.LocalPlayerOffset));
             var localPlayer = MemoryHelpers.Read<MemoryLocalPlayer>(Handle, new IntPtr(localPlayerPointer));
             
-            MemoryHelpers.WriteInt32(Handle, new IntPtr(localPlayer.HealthPointer + Offsets.ProtectionOffset), 0);
-            MemoryHelpers.WriteInt32(Handle, new IntPtr(localPlayer.HealthPointer + Offsets.ValueOffset), health);
-            MemoryHelpers.WriteInt32(Handle, new IntPtr(localPlayer.MoneyPointer + Offsets.ProtectionOffset), 0);
-            MemoryHelpers.WriteInt32(Handle, new IntPtr(localPlayer.MoneyPointer + Offsets.ValueOffset), money);
+            MemoryHelpers.SafeWrite(Handle, new IntPtr(localPlayer.HealthPointer + Offsets.ProtectionOffset), 0);
+            MemoryHelpers.SafeWrite(Handle, new IntPtr(localPlayer.HealthPointer + Offsets.ValueOffset), health);
+            MemoryHelpers.SafeWrite(Handle, new IntPtr(localPlayer.MoneyPointer + Offsets.ProtectionOffset), 0);
+            MemoryHelpers.SafeWrite(Handle, new IntPtr(localPlayer.MoneyPointer + Offsets.ValueOffset), money);
         }
     }
 }
