@@ -12,6 +12,7 @@ namespace Broken.CS2D
             var client = new CS2DClient(process);
             client.PatchEncryption();
             client.FixEncryptedPointers();
+            client.ToggleFlashHack(true);
         }
     }
 }

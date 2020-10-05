@@ -92,5 +92,14 @@ namespace Broken.CS2D
             MemoryHelpers.SafeWrite(Handle, new IntPtr(localPlayer.MoneyPointer + Offsets.ProtectionOffset), 0);
             MemoryHelpers.SafeWrite(Handle, new IntPtr(localPlayer.MoneyPointer + Offsets.ValueOffset), money);
         }
+
+        /// <summary>
+        ///     Enables or disables the flash hack.
+        /// </summary>
+        /// <param name="enable">Whether to enable or disable the flash hack.</param>
+        public void ToggleFlashHack(bool enable)
+        {
+            MemoryHelpers.SafeWrite(Handle, new IntPtr(Offsets.GameBase + Offsets.FlashHackOffset), enable ? 0x0 : 0x1);
+        }
     }
 }
