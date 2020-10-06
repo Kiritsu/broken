@@ -14,7 +14,6 @@ void LoadCLR()
 	freopen_s(&fDummy, "CONOUT$", "w", stderr);
 	freopen_s(&fDummy, "CONOUT$", "w", stdout);
 
-	typedef int32_t(_cdecl* hostfxr_main_fn)(const int argc, const wchar_t** argv);
 	printf("Loading hostfxr\n");
 	HMODULE hostfxr = LoadLibrary(L"C:\\Program Files (x86)\\dotnet\\host\\fxr\\3.1.1\\hostfxr.dll");
 	if (hostfxr != NULL)
