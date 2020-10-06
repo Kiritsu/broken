@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
+using System.IO;
 
-namespace Broken.CS2D
+namespace Broken
 {
     public class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            var process = Process.GetProcessesByName("CS2D").First();
-            var client = new CS2DClient(process);
-            client.ToggleFlashHack(true);
+            Console.WriteLine("Hello world from .NET Assembly!");
         }
     }
 }

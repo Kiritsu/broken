@@ -7,7 +7,7 @@ namespace Broken.Exceptions
         /// <summary>
         ///     Gets the type that was trying to be read.
         /// </summary>
-        public Type? Type { get; init; }
+        public Type? Type { get; set; }
 
         public MemoryReadException(IntPtr processHandle, IntPtr baseAddress) 
             : this("An error occured when trying to read memory.", processHandle, baseAddress)

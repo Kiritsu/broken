@@ -5,6 +5,6 @@
         /// <summary>
         ///     Gets the player's money amount.
         /// </summary>
-        public int Value { get; init; }
+        public int Value { get; set; }
     }
 }

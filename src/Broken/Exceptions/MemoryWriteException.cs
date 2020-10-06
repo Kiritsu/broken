@@ -7,12 +7,12 @@ namespace Broken.Exceptions
         /// <summary>
         ///     Gets the value that was trying to be written to the memory.
         /// </summary>
-        public object? Value { get; init; }
+        public object? Value { get; set; }
         
         /// <summary>
         ///     Gets the size of the value.
         /// </summary>
-        public IntPtr? Size { get; init; }
+        public IntPtr? Size { get; set; }
         
         public MemoryWriteException(IntPtr processHandle, IntPtr baseAddress) 
             : this("An error occured when trying to write memory.", processHandle, baseAddress)
