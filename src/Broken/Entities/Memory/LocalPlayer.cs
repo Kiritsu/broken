@@ -4,7 +4,7 @@ using Broken.CS2D.Enums;
 namespace Broken.CS2D.Entities.Memory
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct MemoryLocalPlayer
+    public unsafe struct LocalPlayer
     {
         [FieldOffset(0x8)]
         public int PlayerId;
@@ -23,11 +23,14 @@ namespace Broken.CS2D.Entities.Memory
         
         [FieldOffset(0x1F4)] 
         public int HealthPointer;
+        public PlayerHealth Health => *(PlayerHealth*)HealthPointer;
 
-        [FieldOffset(0x200)] 
+        [FieldOffset(0x200)]
         public int MoneyPointer;
-        
-        [FieldOffset(0x24C)] 
+        public PlayerMoney Money => *(PlayerMoney*)MoneyPointer;
+
+        [FieldOffset(0x24C)]
         public int WeaponPointer;
+        public PlayerWeapon Weapon => *(PlayerWeapon*)WeaponPointer;
     }
 }

@@ -4,7 +4,7 @@ using Broken.CS2D.Enums;
 namespace Broken.CS2D.Entities.Memory
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct MemoryPlayerWeapon
+    public struct PlayerWeapon
     {
         [FieldOffset(0xC)] 
         public Weapon WeaponId;

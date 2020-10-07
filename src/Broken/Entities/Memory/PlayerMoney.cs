@@ -3,14 +3,14 @@
 namespace Broken.CS2D.Entities.Memory
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct MemoryMoney
+    public struct PlayerMoney
     {
         [FieldOffset(0x8)] 
-        public int Money;
+        public int EncryptedValue;
 
         [FieldOffset(0xC)] 
         public int Protection;
         
-        public int RealMoney => Money + Protection;
+        public int Money => EncryptedValue + Protection;
     }
 }
