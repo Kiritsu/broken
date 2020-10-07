@@ -19,7 +19,7 @@ namespace Broken
         /// <summary>
         ///     Gets the local player.
         /// </summary>
-        public LocalPlayer LocalPlayer => *(LocalPlayer*)(Offsets.GameBase + Offsets.LocalPlayerOffset);
+        public LocalPlayer* LocalPlayer => *(LocalPlayer**)(Offsets.GameBase + Offsets.LocalPlayerOffset);
 
         /// <summary>
         ///     Creates a new <see cref="CS2DClient"/> depending on the given process.

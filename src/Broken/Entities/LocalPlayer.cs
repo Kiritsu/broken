@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Numerics;
+using System.Runtime.InteropServices;
 using Broken.Enums;
 
 namespace Broken.Entities
@@ -13,24 +14,21 @@ namespace Broken.Entities
         public PlayerTeam Team;
         
         [FieldOffset(0x1D4)] 
-        public float PositionX;
-        
-        [FieldOffset(0x1D8)] 
-        public float PositionY;
-        
+        public Vector2 Position;
+       
         [FieldOffset(0x1DC)] 
         public float MouseRotation;
         
         [FieldOffset(0x1F4)] 
         public int HealthPointer;
-        public PlayerHealth Health => *(PlayerHealth*)HealthPointer;
+        public PlayerHealth* Health => *(PlayerHealth**)HealthPointer;
 
         [FieldOffset(0x200)]
         public int MoneyPointer;
-        public PlayerMoney Money => *(PlayerMoney*)MoneyPointer;
+        public PlayerMoney* Money => *(PlayerMoney**)MoneyPointer;
 
         [FieldOffset(0x24C)]
         public int WeaponPointer;
-        public PlayerWeapon Weapon => *(PlayerWeapon*)WeaponPointer;
+        public PlayerWeapon* Weapon => *(PlayerWeapon**)WeaponPointer;
     }
 }

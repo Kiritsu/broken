@@ -5,7 +5,7 @@ namespace Broken
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public unsafe static void Main(string[] args)
         {
             Console.WriteLine("Hello world from .NET Assembly!");
 
@@ -13,7 +13,7 @@ namespace Broken
             while (true)
             {
                 var localPlayer = client.LocalPlayer;
-                Console.WriteLine($"X:{localPlayer.PositionX};Y:{localPlayer.PositionY}");
+                Console.WriteLine($"X:{localPlayer->Position.X};Y:{localPlayer->Position.Y}");
                 Thread.Sleep(10);
             }
         }
