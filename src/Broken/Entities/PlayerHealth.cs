@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Broken.CS2D.Entities.Memory
+namespace Broken.Entities
 {
     [StructLayout(LayoutKind.Explicit)]
     public struct PlayerHealth

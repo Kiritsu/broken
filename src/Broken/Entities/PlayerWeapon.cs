@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
-using Broken.CS2D.Enums;
+using Broken.Enums;
 
-namespace Broken.CS2D.Entities.Memory
+namespace Broken.Entities
 {
     [StructLayout(LayoutKind.Explicit)]
     public struct PlayerWeapon

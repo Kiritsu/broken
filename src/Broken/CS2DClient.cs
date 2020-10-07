@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using Broken.CS2D.Entities.Memory;
+using Broken.Entities;
 
-namespace Broken.CS2D
+namespace Broken
 {
     public unsafe class CS2DClient
     {

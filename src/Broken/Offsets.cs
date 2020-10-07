@@ -1,4 +1,4 @@
-namespace Broken.CS2D
+namespace Broken
 {
     public static class Offsets
     {

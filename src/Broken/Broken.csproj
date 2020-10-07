@@ -3,6 +3,9 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <ApplicationIcon />
+        <OutputType>Exe</OutputType>
+        <StartupObject />
     </PropertyGroup>
 
 </Project>

@@ -22,7 +22,7 @@ void LoadCLR()
 		hostfxr_main_fn main_fn;
 		main_fn = (hostfxr_main_fn)GetProcAddress(hostfxr, "hostfxr_main");
 		printf("main: 0x%p\n\n", main_fn);
-		const wchar_t* args[2] = { L"run", L"C:\\Users\\user\\source\\repos\\Broken\\src\\Broken.CS2D\\bin\\Release\\netcoreapp3.1\\win-x86\\publish\\Broken.CS2D.dll" };
+		const wchar_t* args[2] = { L"run", L"C:\\Users\\user\\source\\repos\\Broken\\src\\Broken\\bin\\Release\\netcoreapp3.1\\win-x86\\publish\\Broken.dll" };
 		main_fn(2, args);
 	}
 }
