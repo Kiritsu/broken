@@ -48,12 +48,12 @@ namespace Broken
         /// <param name="money">Money to set.</param>
         public void FixEncryptedPointers(int health = 100, int money = 16000)
         {
-            var localPlayer = *(LocalPlayer*)(Offsets.GameBase + Offsets.LocalPlayerOffset);
+            var localPlayer = LocalPlayer;
 
-            *(int*)(localPlayer.HealthPointer + Offsets.ProtectionOffset) = 0;
-            *(int*)(localPlayer.HealthPointer + Offsets.ValueOffset) = health;
-            *(int*)(localPlayer.MoneyPointer + Offsets.ProtectionOffset) = 0;
-            *(int*)(localPlayer.MoneyPointer + Offsets.ValueOffset) = money;
+            *(int*)(localPlayer->HealthPointer + Offsets.ProtectionOffset) = 0;
+            *(int*)(localPlayer->HealthPointer + Offsets.ValueOffset) = health;
+            *(int*)(localPlayer->MoneyPointer + Offsets.ProtectionOffset) = 0;
+            *(int*)(localPlayer->MoneyPointer + Offsets.ValueOffset) = money;
         }
 
         /// <summary>
