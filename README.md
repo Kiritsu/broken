@@ -9,6 +9,7 @@ Broken is a short project (for educational purposes) aiming to interact with CS2
 ### Incoming features
 - Anti-fog / Night-Vision
 - Scope-hack (invisible scoping)
+- Radar
 - Free-camera
 - Speed-hack
 - Aimbot
