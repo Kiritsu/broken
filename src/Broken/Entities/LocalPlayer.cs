@@ -21,14 +21,17 @@ namespace Broken.Entities
         
         [FieldOffset(0x1F4)] 
         public int HealthPointer;
-        public PlayerHealth* Health => *(PlayerHealth**)HealthPointer;
+        public EncryptedStruct* Health => *(EncryptedStruct**)HealthPointer;
 
         [FieldOffset(0x200)]
         public int MoneyPointer;
-        public PlayerMoney* Money => *(PlayerMoney**)MoneyPointer;
+        public EncryptedStruct* Money => *(EncryptedStruct**)MoneyPointer;
 
         [FieldOffset(0x24C)]
         public int WeaponPointer;
         public PlayerWeapon* Weapon => *(PlayerWeapon**)WeaponPointer;
+
+        [FieldOffset(0x264)]
+        public bool LightEnabled;
     }
 }

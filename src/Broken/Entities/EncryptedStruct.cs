@@ -3,14 +3,14 @@
 namespace Broken.Entities
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct PlayerMoney
+    public struct EncryptedStruct
     {
-        [FieldOffset(0x8)] 
+        [FieldOffset(0x8)]
         public int EncryptedValue;
 
-        [FieldOffset(0xC)] 
+        [FieldOffset(0xC)]
         public int Protection;
-        
-        public int Money => EncryptedValue + Protection;
+
+        public int Value => EncryptedValue + Protection;
     }
 }
