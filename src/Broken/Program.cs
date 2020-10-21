@@ -6,14 +6,21 @@ namespace Broken
     public class Program
     {
         public unsafe static void Main(string[] args)
-        {
-            Console.WriteLine("Hello world from .NET Assembly!");
-
+        { 
             var client = new CS2DClient();
             while (true)
             {
                 var localPlayer = client.LocalPlayer;
-                Console.WriteLine($"X:{localPlayer->Position.X};Y:{localPlayer->Position.Y}");
+                if (localPlayer != null)
+                {
+                    var timeLeft = client.TimeLeft;
+                    Console.WriteLine($"Player name: {localPlayer->PlayerName}");
+                    Console.WriteLine($"Time left: {timeLeft.Minutes}:{timeLeft.Seconds}");
+                    Console.WriteLine($"X:{localPlayer->Position.X};Y:{localPlayer->Position.Y}");
+                    Console.WriteLine($"{localPlayer->Health->Value} HP");
+                    Console.WriteLine($"{localPlayer->Money->Value} $");
+                    Console.WriteLine($"{localPlayer->Weapon->WeaponId} - {localPlayer->Weapon->CurrentAmmo}|{localPlayer->Weapon->MaxAmmo} ({localPlayer->Weapon->WeaponMode})");
+                }
                 Thread.Sleep(10);
             }
         }

@@ -22,6 +22,12 @@ namespace Broken
         public LocalPlayer* LocalPlayer => *(LocalPlayer**)(Offsets.GameBase + Offsets.LocalPlayerOffset);
 
         /// <summary>
+        ///     Time left before round ends.
+        /// </summary>
+        public TimeSpan TimeLeft => TimeSpan.FromMinutes(*(int*)(Offsets.GameBase + Offsets.TimeLeftMinuteOffset)) 
+            + TimeSpan.FromSeconds(*(int*)(Offsets.GameBase + Offsets.TimeLeftSecondsOffset));
+
+        /// <summary>
         ///     Creates a new <see cref="CS2DClient"/> depending on the given process.
         /// </summary>
         /// <param name="process">Process to bind to this instance.</param>
