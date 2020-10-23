@@ -3,6 +3,7 @@ namespace Broken
     public static class Offsets
     {
         public const int GameBase = 0x400000;
+        public const int EntityListOffset = 0x486330;
         public const int LocalPlayerOffset = 0x496E0C;
         public const int TimeLeftMinuteOffset = 0x496F18;
         public const int TimeLeftSecondsOffset = 0x496F1C;

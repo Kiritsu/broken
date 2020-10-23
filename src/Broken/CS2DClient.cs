@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Broken.Entities;
 
 namespace Broken
@@ -69,6 +71,35 @@ namespace Broken
         public void ToggleFlashHack(bool enable)
         {
             *(int*)(Offsets.GameBase + Offsets.FlashHackOffset) = enable ? 0x0 : 0x1;
+        }
+
+        /// <summary>
+        ///     Gets the different players of the game.
+        /// </summary>
+        public IReadOnlyList<LocalPlayer> GetPlayers()
+        {
+            var list = new List<int>();
+
+            var entityList = *(int*)(*(int*)(Offsets.GameBase + Offsets.EntityListOffset) + 0x8);
+
+            var curr = *(int*)(entityList + 0x8);
+            var next = *(int*)(entityList + 0xC);
+
+            while (true)
+            {
+                var current = *(int*)(next + 0x8);
+
+                if (curr == current)
+                {
+                    break;
+                }
+
+                list.Add(current);
+
+                next = *(int*)(next + 0xC);
+            }
+
+            return list.Select(x => *(LocalPlayer*)x).ToList();
         }
     }
 }
