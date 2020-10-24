@@ -13,5 +13,8 @@ namespace Broken
 
         public const int ValueOffset = 0x8;
         public const int ProtectionOffset = 0xC;
+
+        public const int CurrentLocalPlayerOffset = 0x8;
+        public const int NextLocalPlayerOffset = 0xC;
     }
 }

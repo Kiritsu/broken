@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using Broken.Entities;
 
 namespace Broken
@@ -78,28 +77,30 @@ namespace Broken
         /// </summary>
         public IReadOnlyList<LocalPlayer> GetPlayers()
         {
-            var list = new List<int>();
+            var list = new List<LocalPlayer>();
 
             var entityList = *(int*)(*(int*)(Offsets.GameBase + Offsets.EntityListOffset) + 0x8);
 
-            var curr = *(int*)(entityList + 0x8);
-            var next = *(int*)(entityList + 0xC);
+            // not an actual entity but head of the list.
+            var head = *(int*)(entityList + Offsets.CurrentLocalPlayerOffset);
+            var next = *(int*)(entityList + Offsets.NextLocalPlayerOffset);
 
             while (true)
             {
-                var current = *(int*)(next + 0x8);
+                var current = *(int*)(next + Offsets.CurrentLocalPlayerOffset);
 
-                if (curr == current)
+                // need to break when the next is the same as the head of the list
+                if (head == current)
                 {
                     break;
                 }
 
-                list.Add(current);
+                list.Add(*(LocalPlayer*)current);
 
-                next = *(int*)(next + 0xC);
+                next = *(int*)(next + Offsets.NextLocalPlayerOffset);
             }
 
-            return list.Select(x => *(LocalPlayer*)x).ToList();
+            return list.AsReadOnly();
         }
     }
 }

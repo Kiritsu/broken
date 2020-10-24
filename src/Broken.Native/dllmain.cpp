@@ -53,14 +53,21 @@ void LoadCLR()
 
 	printf("Loading hostfxr.dll\n");
 	HMODULE hostfxr = LoadLibrary(hostFxrPath);
-	if (hostfxr != NULL)
+	if (hostfxr == NULL)
 	{
-		printf("Address of hostfxr.dll: 0x%p\n", hostfxr);
-		hostfxr_main_fn main_fn = (hostfxr_main_fn)GetProcAddress(hostfxr, "hostfxr_main");
-		printf("Address of hostfxr_main: 0x%p\n\n", main_fn);
-		const wchar_t* args[2] = { L"run", dllPath };
-		main_fn(2, args);
+		return;
 	}
+
+	printf("Address of hostfxr.dll: 0x%p\n", hostfxr);
+	hostfxr_main_fn main_fn = (hostfxr_main_fn)GetProcAddress(hostfxr, "hostfxr_main");
+	if (main_fn == NULL)
+	{
+		return;
+	}
+
+	printf("Address of hostfxr_main: 0x%p\n\n", main_fn);
+	const wchar_t* args[2] = { L"run", dllPath };
+	main_fn(2, args);
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule,
@@ -68,12 +75,12 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	LPVOID lpReserved
 )
 {
-	switch (ul_reason_for_call)
+	if (ul_reason_for_call != DLL_PROCESS_ATTACH)
 	{
-	case DLL_PROCESS_ATTACH:
-		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)LoadCLR, NULL, NULL, NULL);
-		break;
+		return TRUE;
 	}
+
+	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)LoadCLR, NULL, NULL, NULL);
 	return TRUE;
 }
 
