@@ -13,7 +13,7 @@ namespace Broken
                 var players = client.GetPlayers();
                 foreach (var player in players)
                 {
-                    Console.WriteLine($"Player ID#{player.PlayerId} {player.PlayerName}");
+                    Console.WriteLine($"Player ID#{player.Id} {player.Name}");
                 }
                 /*var localPlayer = client.LocalPlayer;
                 if (localPlayer != null)
